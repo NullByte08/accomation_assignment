@@ -1,4 +1,5 @@
 import 'package:accomation_assignment/models/parameter_models.dart';
+import 'package:accomation_assignment/services/application_providers.dart';
 import 'package:accomation_assignment/services/future_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,6 +20,14 @@ class _HomePageScreenState extends ConsumerState<HomePageScreen> {
         title: const Text("Weather Data"),
         elevation: 10,
         scrolledUnderElevation: 10,
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.read(applicationModelProvider.notifier).switchDarkMode();
+            },
+            icon: Icon(ref.watch(applicationModelProvider).darkMode ? Icons.light_mode : Icons.dark_mode),
+          )
+        ],
       ),
       body: userLocationFuture.when(
         data: (value) {
